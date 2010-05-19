@@ -90,7 +90,7 @@ class GameBoard
 		 */
 		void reset();
 		/**
-		 * Método que alloca a matriz do tabuleiro interno
+		 * Método que retorna o valor de uma posicão especificada
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	18/05/2010
@@ -98,7 +98,16 @@ class GameBoard
 		 * @param	const Gorgon::Point& pPosition, posicao a pegar o valor no tabuleiro
 		 * @return	GameBoard::BoardValue&
 		 */
-		const GameBoard::BoardValue& getPosition(const Gorgon::Point& pPosition) const;
+		const GameBoard::BoardValue& getPosition(const Gorgon::Point& pPosition,bool debug=false) const;
+		/**
+		 * Método que retorna o número de posicões vazias no tabuleiro
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	19/05/2010
+		 * @version	19/05/2010
+		 * @return	int
+		 */
+		int getFreePositionNumber() const;
 		/**
 		 * Método para setar uma posicão no tabuleiro
 		 *
@@ -144,5 +153,15 @@ class GameBoard
 		 * @param	const Gorgon::Point& pPosition, posicão a desenhar o tabuleiro
 		 */
 		void draw(const Gorgon::Point& pPosition) const;
+		/**
+		 * Método para retornar a utilidade do tabuleiro para determinado jogador
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	19/05/2010
+		 * @version	19/05/2010
+		 * @param	GameBoard::BoardValue& pPlayer, jogador que será analisada a utilidade
+		 * @return	int
+		 */
+		int getUtil(GameBoard::BoardValue& pPlayer) const;
 };
 #endif

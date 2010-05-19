@@ -1,6 +1,6 @@
 all: main
 
-main: src/main.cpp game game_states game_board game_player game_player_human
+main: src/main.cpp game game_states game_board game_player game_player_human game_player_computer
 	g++ src/main.cpp obj/* -o game.e `gorgon-config --libs` `allegro-config --libs`
 
 game: include/game.hpp src/game.cpp
@@ -55,6 +55,10 @@ game_player_human: include/game_player_human.hpp src/game_player_human.cpp
 	g++ -c src/game_player_human.cpp
 	mv game_player_human.o obj/
 
+game_player_computer: include/game_player_computer.hpp src/game_player_computer.cpp
+	g++ -c src/game_player_computer.cpp
+	mv game_player_computer.o obj/
+	
 clean:
 	rm obj/*
 	rm game.e

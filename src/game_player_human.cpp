@@ -31,6 +31,7 @@ void GamePlayerHuman::play()
 		if(GameBoard::get().getPosition(mPosition) == GameBoard::NONE)
 		{
 			GameBoard::get().setPosition(mPlayerValue, mPosition);
+			printf("Local Score: %d\n",GameBoard::get().getUtil(mPlayerValue));
 			setIsPlaying(false);
 		}
 		else
