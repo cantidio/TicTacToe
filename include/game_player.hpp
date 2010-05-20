@@ -70,9 +70,8 @@ class GamePlayer
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	19/05/2010
 		 * @version	19/05/2010
-		 * @param	const Gorgon::Point& pPosition, a posicão do tabuleiro
 		 */
-		virtual void draw(const Gorgon::Point& pPosition) const {}
+		virtual void draw() const {}
 };
 #endif
 

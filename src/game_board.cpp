@@ -36,6 +36,16 @@ int GameBoard::getSize() const
 	return mSize;
 }
 
+void GameBoard::setLocation(const Gorgon::Point& pLocation)
+{
+	mLocation = pLocation;
+}
+
+const Gorgon::Point& GameBoard::getLocation() const
+{
+	return mLocation;
+}
+
 void GameBoard::reset()
 {
 	int width,height;
@@ -59,16 +69,12 @@ void GameBoard::setPosition(const BoardValue& pValue, const Gorgon::Point& pPosi
 	}
 }
 
-const GameBoard::BoardValue& GameBoard::getPosition(const Gorgon::Point& pPosition,bool debug) const
+const GameBoard::BoardValue& GameBoard::getPosition(const Gorgon::Point& pPosition) const
 {
-//	if(pPosition.getX() < mSize && pPosition.getY() < mSize)
-//	{
-		if(debug)
-		{
-			printf("getPosition: linha: %d, coluna: %d value: %d\n",(int)pPosition.getY(),(int)pPosition.getX(),getPosition(pPosition));
-		}
+	if(pPosition.getX() < mSize && pPosition.getY() < mSize)
+	{
 		return mInternalBoard[(int)pPosition.getY()][(int)pPosition.getX()];
-//	}
+	}
 }
 int GameBoard::getFreePositionNumber() const
 {
@@ -119,26 +125,67 @@ void GameBoard::setNextFreePosition(const GameBoard::BoardValue& pValue, int pEs
     }
 }
 
-void GameBoard::draw(const Gorgon::Point& pPosition) const
+void GameBoard::draw() const
 {
 	Gorgon::Point i;	
-	char aux;
+	int basePosY = 0;
+	int basePosX = 0;
+	
 	for(i.setY(0); i.getY() < mSize; i.addY(1))
 	{
 		for(i.setX(0); i.getX() < mSize; i.addX(1))
 		{
+			basePosY = mLocation.getY() + i.getY()*70;
+			basePosX = mLocation.getX() + i.getX()*80;
 			switch(getPosition(i))
 			{
-				case GameBoard::NONE:		aux = ' ';	break;
-				case GameBoard::PLAYER1:	aux = 'X';	break;
-				case GameBoard::PLAYER2:	aux = 'O';	break;
+				case GameBoard::NONE:
+					Gorgon::Video::get().drawText("TTTTTTTTTT",basePosX, basePosY+=10,0xFFFFFF);
+					Gorgon::Video::get().drawText("T::::::::T",basePosX, basePosY+=10,0xFFFFFF);
+					Gorgon::Video::get().drawText("T::::::::T",basePosX, basePosY+=10,0xFFFFFF);
+					Gorgon::Video::get().drawText("T::::::::T",basePosX, basePosY+=10,0xFFFFFF);
+					Gorgon::Video::get().drawText("T::::::::T",basePosX, basePosY+=10,0xFFFFFF);
+					Gorgon::Video::get().drawText("T::::::::T",basePosX, basePosY+=10,0xFFFFFF);
+					Gorgon::Video::get().drawText("TTTTTTTTTT",basePosX, basePosY+=10,0xFFFFFF);
+					break;
+				case GameBoard::PLAYER1:					
+					Gorgon::Video::get().drawText("TTTTTTTTTT",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("T  ::::  T",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("T:  ::  :T",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("T:::  :::T",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("T:  ::  :T",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("T  ::::  T",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("TTTTTTTTTT",basePosX, basePosY+=10,0xDDDDDD);
+					basePosY-=60;
+					Gorgon::Video::get().drawText(" XX    XX ",basePosX, basePosY+=10,0x0000DD);
+					Gorgon::Video::get().drawText("  XX  XX  ",basePosX, basePosY+=10,0x0000DD);
+					Gorgon::Video::get().drawText("    XX    ",basePosX, basePosY+=10,0x0000DD);
+					Gorgon::Video::get().drawText("  XX  XX  ",basePosX, basePosY+=10,0x0000DD);
+					Gorgon::Video::get().drawText(" XX    XX ",basePosX, basePosY+=10,0x0000DD);
+
+					break;
+				case GameBoard::PLAYER2:
+					Gorgon::Video::get().drawText("TTTTTTTTTT",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("T:::  :::T",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("T:  ::  :T",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("T  ::::  T",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("T:  ::  :T",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("T:::  :::T",basePosX, basePosY+=10,0xDDDDDD);
+					Gorgon::Video::get().drawText("TTTTTTTTTT",basePosX, basePosY+=10,0xDDDDDD);
+					basePosY-=60;
+					Gorgon::Video::get().drawText("    OO    ",basePosX, basePosY+=10,0xDD0000);
+					Gorgon::Video::get().drawText("  OO  OO  ",basePosX, basePosY+=10,0xDD0000);
+					Gorgon::Video::get().drawText(" OO    OO ",basePosX, basePosY+=10,0xDD0000);
+					Gorgon::Video::get().drawText("  OO  OO  ",basePosX, basePosY+=10,0xDD0000);
+					Gorgon::Video::get().drawText("    OO    ",basePosX, basePosY+=10,0xDD0000);
+										
+					break;
 			}
-			Gorgon::Video::get().drawText(pPosition.getX() + 10 + i.getX() * 10,pPosition.getY() + i.getY()*10,0xFFFFFF,-1,"%c ",aux);
 		}
 	}
 }
 
-GameBoard::BoardValue GameBoard::gameOver() const
+const GameBoard::BoardValue GameBoard::getWinner() const
 {
     short i,j;
 	char diagonal1, diagonal2, horizontal, vertical;
@@ -147,9 +194,6 @@ GameBoard::BoardValue GameBoard::gameOver() const
     {
         for(vertical = horizontal = 1,j = 0; j < mSize - 1; ++j)
         {
-        	//if(getPosition((j,i)) == GameBoard::NONE || getPosition((j,i)) != getPosition((j+1,i)))					horizontal	= 0;
-			//if(getPosition((i,j)) == GameBoard::NONE || getPosition((i,j)) != getPosition((i,j+1)))					vertical	= 0;
-        	
             if(mInternalBoard[i][j] == GameBoard::NONE || mInternalBoard[i][j] != mInternalBoard[i][j+1])					horizontal	= 0;
 			if(mInternalBoard[j][i] == GameBoard::NONE || mInternalBoard[j][i] != mInternalBoard[j+1][i])					vertical	= 0;
         }
@@ -157,8 +201,6 @@ GameBoard::BoardValue GameBoard::gameOver() const
         if(vertical		== 1)  	return mInternalBoard[j-1][i];
         if(i < mSize - 1)
         {
-        	//if(!(getPosition((i,i))			!=0 && getPosition((i,i))			== getPosition((i+1,i+1)))			)	diagonal1 = 0;
-			//if(!(getPosition((mSize-1-i,i))	!=0 && getPosition((mSize-1-i,i))	== getPosition((mSize-2-i,i+1)))	)	diagonal2 = 0;
 			if(!(mInternalBoard[i][i]			!=0 && mInternalBoard[i][i]			== mInternalBoard[i+1][i+1])		)	diagonal1 = 0;
 			if(!(mInternalBoard[i][mSize-1-i]	!=0 && mInternalBoard[i][mSize-1-i]	== mInternalBoard[i+1][mSize-2-i])	)	diagonal2 = 0;
 		}
@@ -168,19 +210,56 @@ GameBoard::BoardValue GameBoard::gameOver() const
     return GameBoard::NONE;
 }
 
+const GameBoard::BoardState GameBoard::getBoardState() const
+{
+	int i,j,util = 0;
+	char aux1,aux2;
+	GameBoard::BoardValue winner	= getWinner();
+	GameBoard::BoardValue player	= GameBoard::PLAYER1;
+	GameBoard::BoardValue enemy		= GameBoard::PLAYER2;
+	char linhaFalsa, colunaFalsa, diagonal1Falsa, diagonal2Falsa;
+
+	if(winner != GameBoard::NONE) return GameBoard::WIN;
+		
+	for(i = diagonal1Falsa = diagonal2Falsa = 0; i < mSize; ++i)
+	{
+		for(j = linhaFalsa = colunaFalsa = 0; j < mSize; ++j)
+		{
+			if(getPosition(Gorgon::Point(j,i)) == enemy)	linhaFalsa = 1;
+			if(getPosition(Gorgon::Point(i,j)) == enemy)	colunaFalsa = 1;
+		}
+		if(!linhaFalsa || !colunaFalsa) return GameBoard::PLAYING;
+		
+		if(getPosition(Gorgon::Point(i,i))			== enemy) diagonal1Falsa = 1;
+		if(getPosition(Gorgon::Point(mSize-1-i,i))	== enemy) diagonal2Falsa = 1;
+	}
+	if(!diagonal1Falsa || !diagonal2Falsa)	return GameBoard::PLAYING;
+
+	for(i = diagonal1Falsa = diagonal2Falsa = 0; i < mSize; ++i)
+	{
+		for(j = linhaFalsa = colunaFalsa = 0; j < mSize; ++j)
+		{
+			if(getPosition(Gorgon::Point(j,i)) == player)		linhaFalsa	= 1;
+			if(getPosition(Gorgon::Point(i,j)) == player)		colunaFalsa	= 1;
+		}
+		if(!linhaFalsa || !colunaFalsa)		return GameBoard::PLAYING;
+
+		if(getPosition(Gorgon::Point(i,i))			== player)	diagonal1Falsa = 1;
+		if(getPosition(Gorgon::Point(i,mSize-1-i))	== player)	diagonal2Falsa = 1;
+	}
+	if(!diagonal1Falsa || !diagonal2Falsa)	return GameBoard::PLAYING;
+	
+	return GameBoard::DRAW;
+}
+
 int GameBoard::getUtil(GameBoard::BoardValue& pPlayer) const
 {
 	int i,j,util = 0;
 	char aux1,aux2;
-	GameBoard::BoardValue win	= gameOver();
 	GameBoard::BoardValue enemy	= (pPlayer == GameBoard::PLAYER1) ? GameBoard::PLAYER2 : GameBoard::PLAYER1;
 	char linhaFalsa, colunaFalsa, diagonal1Falsa, diagonal2Falsa;
 	short scoreV, scoreH, scoreD1, scoreD2;
-	if(win != GameBoard::NONE)
-	{
-		util = (win == pPlayer) ? 30 : -30;
-	}
-		
+
 	//possibilidades do jogador 1 vencer
 	for(i=diagonal1Falsa=diagonal2Falsa=scoreD1=scoreD2=0; i < mSize; ++i)
 	{

@@ -9,11 +9,11 @@
  *
  * @author	Cantidio Oliveira Fontes
  * @since	18/05/2010
- * @version	19/05/2010
+ * @version	20/05/2010
  */
 class GameStateGame : public GameState
 {
-	private:
+	protected:
 		/**
 		 * Variável que guarda o jogador1 do jogo
 		 */
@@ -26,7 +26,19 @@ class GameStateGame : public GameState
 		 * Variável que guarda quem está jogando
 		 */
 		GamePlayer* mNowPlaying;
+		/**
+		 * Variável que guarda o número de frames após o jogo ter acabado
+		 */
+		long mFrameNumber2;
 	public:
+		/**
+		 * Método Construtor
+		 *
+		 * @author	Cantidio Oliveira Fontes
+		 * @since	19/05/2010
+		 * @version	19/05/2010
+		 */
+		GameStateGame();
 		/**
 		 * Método Destrutor
 		 *
@@ -34,21 +46,13 @@ class GameStateGame : public GameState
 		 * @since	18/05/2010
 		 * @version	18/05/2010
 		 */
-		~GameStateGame();
-		/**
-		 * Método para setar a inicializaćão do estado
-		 *
-		 * @author	Cantidio Oliveira Fontes
-		 * @since	18/05/2010
-		 * @version	19/05/2010
-		 */
-		virtual void init();
+		virtual ~GameStateGame();
 		/**
 		 * Método para rodar 1 ciclo do estado
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	18/05/2010
-		 * @version	19/05/2010
+		 * @version	20/05/2010
 		 * @param	bool& pGameRunning, variável que fala se o jogo está rodando, pode ser alterada
 		 */
 		virtual bool run(bool& pGameRunning);

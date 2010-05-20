@@ -10,6 +10,8 @@
  */
 class GameStateDisclaimer : public GameState
 {
+	private:
+		int mScrool;
 	public:
 		~GameStateDisclaimer();
 		virtual void init();

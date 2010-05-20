@@ -1,46 +1,44 @@
 #include "../include/game_state_game.hpp"
 #include "../include/game_state_win.hpp"
-#include "../include/game_player_human.hpp"
-#include "../include/game_player_computer.hpp"
-GameStateGame::~GameStateGame()
+
+GameStateGame::GameStateGame()
 {
-	printf("GameStateGame end.\n");
+	GameBoard::get().setLocation(Gorgon::Point(40,7));
+	mFrameNumber2 = 0;
 }
 
-void GameStateGame::init()
+GameStateGame::~GameStateGame()
 {
-	printf("GameStateGame init.\n");
-	GameBoard::get().reset();										//resetamos o tabuleiro
-	mPlayer1		= new GamePlayerHuman(GameBoard::PLAYER1);		//criamos o jogador1, humano
-	mPlayer2		= new GamePlayerComputer(GameBoard::PLAYER2);	//criamos o jogador2, PC-BURRO
-	mNowPlaying 	= mPlayer1;										//setamos o primeiro player a jogar, talvez randomizar isso
-	key[KEY_ESC]	= 0;
-	key[KEY_ENTER]	= 0;
+	delete mPlayer1;
+	delete mPlayer2;
 }
 
 bool GameStateGame::run(bool& pGameRunning)
 {
-	GameBoard::BoardValue boardScore = GameBoard::get().gameOver();
-	
 	GameState::run(pGameRunning);
-	Gorgon::Video::get().clear();
-	GameBoard::get().draw((120,100));
-	mNowPlaying->draw((120,100));
-	Gorgon::Video::get().show();
+	Gorgon::Video::get().clear();			//limpa o vídeo
+	GameBoard::get().draw();				//desenha o tabuleiro
+	mNowPlaying->draw();					//desenha o jogador
+	Gorgon::Video::get().show();			//mostra no vídeo
 	
-	if(boardScore != GameBoard::NONE)//alguém ganhou!
+	switch(GameBoard::get().getBoardState())
 	{
-		setNextState(new GameStateWin(boardScore));
-		return false;
+		case GameBoard::WIN:				//Alguém ganhou
+		case GameBoard::DRAW:				//Deu empate
+			setNextState(new GameStateWin(GameBoard::get().getWinner()));
+			
+			if(mFrameNumber2 > 60) return false;
+			++mFrameNumber2;
+			
+			break;
+		case GameBoard::PLAYING:			//Jogando
+			mNowPlaying->play();			//jogador da vez joga
+			if(!mNowPlaying->isPlaying())	//se o turno do jogador estiver acabado, troca
+			{
+				mNowPlaying = (mNowPlaying == mPlayer1) ? mPlayer2 : mPlayer1;
+				mNowPlaying->setIsPlaying(true);
+			}
 	}
-	
-	mNowPlaying->play();			//jogador da vez joga
-	if(!mNowPlaying->isPlaying())	//se o turno do jogador estiver acabado, troca
-	{
-		mNowPlaying = (mNowPlaying == mPlayer1) ? mPlayer2 : mPlayer1;
-		mNowPlaying->setIsPlaying(true);
-	}
-	
 	if(key[KEY_ESC])
 	{
 		pGameRunning = false;

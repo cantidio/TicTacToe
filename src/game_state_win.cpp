@@ -9,11 +9,14 @@ GameStateWin::GameStateWin(const GameBoard::BoardValue& pWinner)
 void GameStateWin::init()
 {
 	printf("GameStateWin init.\n");
+	int basePos		= 60;
+	key[KEY_ENTER]	= 0;
+	
 	Gorgon::Video::get().clear();
-	int basePos = 60;
+	
 	if(mWinner != GameBoard::NONE)
 	{
-		Gorgon::Video::get().drawText("WIN",160-7,30,0xFFFFFF);
+		Gorgon::Video::get().drawText("WIN",150,30,0xFFFFFF);
 		Gorgon::Video::get().drawText(" KNOCKOUT!!",10,basePos+=10,0xFFFFFF);
 
 		if(mWinner == GameBoard::PLAYER1)
@@ -27,10 +30,11 @@ void GameStateWin::init()
 	}
 	else
 	{
-		Gorgon::Video::get().drawText("DRAW  GAME",160-37,30,0xFFFFFF);
+		Gorgon::Video::get().drawText("DRAW  GAME",120,30,0xFFFFFF);
+		basePos+=20;
 	}
 	
-	Gorgon::Video::get().drawText(" PRESS ENTER TO RETURN TO MENU",10,basePos+=50,0xFFFFFF);
+	Gorgon::Video::get().drawText(" PRESS ENTER TO RETURN TO MENU",10,basePos+=80,0xFFFFFF);
 	Gorgon::Video::get().show();
 }
 
@@ -43,9 +47,8 @@ bool GameStateWin::run(bool& pGameRunning)
 {
 	GameState::run(pGameRunning);
 	
-	if(getFrameNumber() == 180 || key[KEY_ENTER])
+	if(key[KEY_ENTER])
 	{
-		key[KEY_ENTER] = 0;
 		setNextState(new GameStateMenu());
 		return false;
 	}

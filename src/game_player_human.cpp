@@ -31,7 +31,6 @@ void GamePlayerHuman::play()
 		if(GameBoard::get().getPosition(mPosition) == GameBoard::NONE)
 		{
 			GameBoard::get().setPosition(mPlayerValue, mPosition);
-			printf("Local Score: %d\n",GameBoard::get().getUtil(mPlayerValue));
 			setIsPlaying(false);
 		}
 		else
@@ -42,12 +41,12 @@ void GamePlayerHuman::play()
 	}
 }
 
-void GamePlayerHuman::draw(const Gorgon::Point& pPosition) const
+void GamePlayerHuman::draw() const
 {
 	Gorgon::Video::get().drawRectangle
 	(
-		pPosition + Gorgon::Point(9,-2) + mPosition*10,
-		Gorgon::Rectangle(9,9),
+		GameBoard::get().getLocation() + Gorgon::Point(-1,8) + Gorgon::Point(mPosition.getX()*80, mPosition.getY()*70) ,
+		Gorgon::Rectangle(80,70),
 		0xFF0000
 	);
 }

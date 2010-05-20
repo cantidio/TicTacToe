@@ -33,12 +33,12 @@ bool GameStateOption::run(bool& pGameRunning)
 	GameState::run(pGameRunning);
 	Gorgon::Video::get().clear();
 	
-	Gorgon::Video::get().drawText(" OPTIONS",10,20,0xFFFFFF);
+	Gorgon::Video::get().drawText(" OPTIONS",10,80,0xFFFFFF);
 	
-	Gorgon::Video::get().drawText(" AI LEVEL: "			,10,40,0xFFFFFF);
-	Gorgon::Video::get().drawText(AILevels[mAILevel]	,100,40,0xFFFFFF);
-	Gorgon::Video::get().drawText(" BACK"				,10,50,0xFFFFFF);
-	Gorgon::Video::get().drawText(">"					,10,mOption*10+40,0xFFFFFF);
+	Gorgon::Video::get().drawText(" AI LEVEL: "			,010,100,0xFFFFFF);
+	Gorgon::Video::get().drawText(AILevels[mAILevel]	,100,100,0xFFFFFF);
+	Gorgon::Video::get().drawText(" BACK"				,010,110,0xFFFFFF);
+	Gorgon::Video::get().drawText(">"					,010,mOption*10+100,0xFFFFFF);
 	
 	Gorgon::Video::get().show();
 	
