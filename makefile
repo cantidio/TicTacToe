@@ -1,8 +1,5 @@
 all: main
 
-relink: game_board
-	g++ src/main.cpp obj/* -o game.e `gorgon-config --libs` `allegro-config --libs`
-	
 main: src/main.cpp game game_states game_board game_player game_player_human game_player_computer
 	g++ src/main.cpp obj/* -o game.e `gorgon-config --libs` `allegro-config --libs`
 

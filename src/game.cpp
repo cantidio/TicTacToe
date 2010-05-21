@@ -1,16 +1,12 @@
 #include "../include/game.hpp"
+#include "../include/game_state_disclaimer.hpp"
 int gFrameControler;
 void game_time()
 {
 	++gFrameControler;
 }END_OF_FUNCTION(game_time);
-/*
-int gFrameControler;
-void timerThread()
-{
-	++gFrameControler;
-}END_OF_FUNCTION(timerThread);
-class Timer
+
+/*class Timer
 {
 	private:
 		int mFps;
@@ -22,8 +18,8 @@ class Timer
 			LOCK_FUNCTION(game_time);
 			install_int_ex(game_time, BPS_TO_TIMER(mFps));
 		}
-};
-*/
+};*/
+
 Game::Game()
 {
 	printf("Game init.\n");
@@ -58,8 +54,8 @@ void Game::run()
 					mGameState = aux;							//atualiza
 					mGameState->init();
 				}
-				else if(mGameRunning)
-				{
+				else if(mGameRunning)							//se o estado mudar, e o próximo estado for inválido
+				{												//e o jogo continuar executando, aborte-o
 					printf("GameStateNULL.\n");
 					printf("Force ShutDown.\n");
 					mGameRunning = false;
@@ -67,9 +63,9 @@ void Game::run()
 				}
 			}
 			--gFrameControler;
-			mFrame++;
+			++mFrame;
 		}
 	}
-	printf("Number of frames: %ld\n",mFrame);
+	printf("Total number of frames: %ld\n",mFrame);
 }
 

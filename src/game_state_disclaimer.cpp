@@ -5,7 +5,6 @@ void GameStateDisclaimer::init()
 {
 	printf("GameStateDisclaimer init.\n");
 	mScrool			= 320;
-	while(!key[KEY_ENTER]);
 	key[KEY_ENTER]	= 0;
 	
 }
@@ -39,7 +38,7 @@ bool GameStateDisclaimer::run(bool& pGameRunning)
 	Gorgon::Video::get().drawText("| |                                              __/ |   __/ |           __/ |                       "			,mScrool,basePos+=10,0xDDDDDD);
 	Gorgon::Video::get().drawText("|_|                                             |___/   |___/           |___/                        "			,mScrool,basePos+=10,0xDDDDDD);
 	Gorgon::Video::get().show();
-	mScrool-=6;
+	mScrool-=3;
 	
 	if(mScrool < -820 || key[KEY_ENTER])
 	{

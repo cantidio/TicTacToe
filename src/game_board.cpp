@@ -9,7 +9,6 @@ void GameBoard::mallocInternalBoard()
 	{
 		mInternalBoard[i] = (GameBoard::BoardValue *)malloc(sizeof(GameBoard::BoardValue) * mSize);
 	}
-	//reset();
 }
 
 GameBoard::GameBoard()
@@ -20,6 +19,11 @@ GameBoard::GameBoard()
 
 GameBoard::~GameBoard()
 {
+	for(int i = 0; i < mSize; ++i)
+	{
+		delete mInternalBoard[i];
+	}
+	delete mInternalBoard;
 }
 
 GameBoard& GameBoard::get()

@@ -2,6 +2,7 @@
 #define _GAME_STATE_OPPENING_
 #include "game_state.hpp"
 #include <gorgon++/gorgon.hpp>
+
 /**
  * Classe que representa o estado de abertura do jogo
  *

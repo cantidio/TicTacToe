@@ -1,12 +1,13 @@
 #ifndef _GAME_
 #define _GAME_
-#include "game_states.hpp"
+#include "game_state.hpp"
+
 /**
  * Classe que representa o jogo
  *
  * @author	Cantidio Oliveira Fontes
  * @since	18/05/2010
- * @version	18/05/2010
+ * @version	21/05/2010
  */
 class Game
 {
@@ -45,7 +46,7 @@ class Game
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	18/05/2010
-		 * @version	18/05/2010
+		 * @version	21/05/2010
 		 */
 		void run();
 };

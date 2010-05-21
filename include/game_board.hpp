@@ -1,12 +1,13 @@
 #ifndef _GAME_BOARD_
 #define _GAME_BOARD_
 #include <gorgon++/gorgon.hpp>
+
 /**
  * Classe que representa o tabuleiro do jogo
  *
  * @author	Cantidio Oliveira Fontes
  * @since	18/05/2010
- * @version	19/05/2010
+ * @version	20/05/2010
  */
 class GameBoard
 {
@@ -72,7 +73,7 @@ class GameBoard
 		 *
 		 * @author	Cantidio Oliveira Fontes
 		 * @since	18/05/2010
-		 * @version	18/05/2010
+		 * @version	20/05/2010
 		 */
 		virtual ~GameBoard();
 	public:

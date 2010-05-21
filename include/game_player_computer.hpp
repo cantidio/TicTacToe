@@ -3,7 +3,7 @@
 #include "game_player.hpp"
 
 /**
- * Classe que representa um jogador humano
+ * Classe que representa um jogador Computador
  *
  * @author	Cantidio Oliveira Fontes
  * @since	19/05/2010
@@ -12,7 +12,13 @@
 class GamePlayerComputer : public GamePlayer
 {
 	private:
+		/**
+		 * Profundidade no algoritmo MinMax
+		 */
 		int mCurrentDepth;
+		/**
+		 * Movimento a ser escolhido pelo computador
+		 */
 		int mMove;
 	public:
 		/**

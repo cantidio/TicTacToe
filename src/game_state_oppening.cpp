@@ -6,10 +6,10 @@ void GameStateOppening::init()
 	printf("GameStateOppening init.\n");
 	key[KEY_ENTER]	= 0;
 	key[KEY_ESC]	= 0;
-	mScrool = 320;	
-	mTicImg = Gorgon::Image(420,158);
-	mTacImg = Gorgon::Image(530,158);
-	mToeImg = Gorgon::Image(520,158);
+	mScrool 		= 320;	
+	mTicImg 		= Gorgon::Image(420,158);
+	mTacImg 		= Gorgon::Image(530,158);
+	mToeImg 		= Gorgon::Image(520,158);
 	
 	int basePos=-10;
 	mTicImg.drawText("TTTTTTTTTTTTTTTTTTTTTTTIIIIIIIIII      CCCCCCCCCCCCC"						,0,basePos+=10,0xFFFFFF);
@@ -77,14 +77,9 @@ bool GameStateOppening::run(bool& pGameRunning)
 	Gorgon::Video::get().clear();
 	if(mScrool > -(mTicImg.getWidth() + mTacImg.getWidth() + mToeImg.getWidth() + 100) )
 	{
-		if(mScrool > -(mTicImg.getWidth()))
-			Gorgon::Video::get().drawImage(mTicImg,mScrool,40);
-		
-		if(mScrool < -(mTicImg.getWidth() - 280) && mScrool > -(mTacImg.getWidth()+mTicImg.getWidth()+50))
-			Gorgon::Video::get().drawImage(mTacImg,mScrool + mTicImg.getWidth()+50,40);
-		
-		if(mScrool < -(mTicImg.getWidth()+mTacImg.getWidth()-250) && mScrool > -(mTicImg.getWidth() + mTacImg.getWidth() + mToeImg.getWidth() + 100))
-			Gorgon::Video::get().drawImage(mToeImg,mScrool + mTicImg.getWidth() + mTacImg.getWidth()+100,40);
+		Gorgon::Video::get().drawImage(mTicImg,mScrool,40);
+		Gorgon::Video::get().drawImage(mTacImg,mScrool + mTicImg.getWidth()+50,40);
+		Gorgon::Video::get().drawImage(mToeImg,mScrool + mTicImg.getWidth() + mTacImg.getWidth()+100,40);
 	}
 	else
 	{
@@ -97,7 +92,7 @@ bool GameStateOppening::run(bool& pGameRunning)
 		return false;
 	}
 	Gorgon::Video::get().show();
-	mScrool-=5;
+	mScrool-=6;
 	if(key[KEY_ESC])
 	{
 		pGameRunning=false;

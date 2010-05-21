@@ -3,7 +3,7 @@
 #include "game_board.hpp"
 
 /**
- * Classe que representa um jogador
+ * Classe que representa um jogador Genérico
  *
  * @author	Cantidio Oliveira Fontes
  * @since	19/05/2010

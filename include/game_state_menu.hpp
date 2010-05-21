@@ -2,6 +2,7 @@
 #define _GAME_STATE_MENU_
 #include "game_state.hpp"
 #include <gorgon++/gorgon.hpp>
+
 /**
  * Classe que representa o estado do menu principal do jogo
  *
